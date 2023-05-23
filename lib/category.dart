@@ -1,3 +1,4 @@
+import 'package:categorydemo/subCategory.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -21,11 +22,18 @@ class _CategoryState extends State<Category> {
               return ListView.builder(
                   itemCount: abc.data?.length,
                   itemBuilder: (context,i){
-                    return Column(
-                      children: [
-                        ListTile(title: Text(abc.data?[i]['Cname']),),
-                        Image.network("http://www.digitechy.in.net/upload/"+abc.data?[i]['Cimg'])
-                      ],
+                    return InkWell(
+                        onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context){
+                        return SubCategory(id: abc.data?[i]['id']);
+                      }));
+                    },
+                        child:Column(
+                               children: [
+                              ListTile(title: Text(abc.data?[i]['Cname']),),
+                              Image.network("http://api.namanraj.link/upload/"+abc.data?[i]['Cimg'])
+                           ],
+                           )
                     );
                   }
               );
@@ -54,9 +62,8 @@ class _CategoryState extends State<Category> {
     }
   }*/
 
-
   Future<List<dynamic>>ApiMansoori() async {
-    final rsspcone =await http.get(Uri.parse("http://www.digitechy.in.net/Webservice1.asmx/CategoryApi"));
+    final rsspcone =await http.get(Uri.parse("http://api.namanraj.link/WebService1.asmx/CategoryApi"));
     if(rsspcone.statusCode==200){
       return json.decode(rsspcone.body);
     }

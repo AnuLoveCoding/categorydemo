@@ -1,3 +1,4 @@
+import 'package:categorydemo/category.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'Registerpage.dart';
@@ -54,6 +55,9 @@ class _LoginPageState extends State<LoginPage> {
     if(response.statusCode == 200){
       print(response.body);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login Sucessfully")));
+      Navigator.push(context, MaterialPageRoute(builder: (context){
+        return Category();
+      }));
     }else{
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: CircularProgressIndicator()));
       throw Exception('Login Failed');

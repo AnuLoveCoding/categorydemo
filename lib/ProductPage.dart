@@ -1,45 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
-import 'ProductPage.dart';
-
-class SubCategory extends StatefulWidget {
-   int id;
-  SubCategory({required this.id});
+class ProductPage extends StatefulWidget {
+  int id;
+  ProductPage({required this.id});
 
   @override
-  State<SubCategory> createState() => _SubCategoryState();
+  State<ProductPage> createState() => _ProductPageState();
 }
 
-class _SubCategoryState extends State<SubCategory> {
-
+class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Hello Singh'),
-          centerTitle: true,
-        ),
-        body: FutureBuilder<List<dynamic>>(
-          future: subCategory(),
+    return Scaffold(appBar: AppBar(
+      title: Text(""),
+    ),
+     body: FutureBuilder<List<dynamic>>(
+          future: product(),
           builder: (context,abc){
             if(abc.hasData){
               return ListView.builder(
                   itemCount: abc.data?.length,
                   itemBuilder: (context,i){
-                    return InkWell(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context){
-                            return ProductPage(id: abc.data?[i]['id']);
-                          }));
-                        },
-                        child:Column(
+                    return InkWell( onTap: (){
+
+                    },
+                      child: Column(
                             children: [
                               ListTile(title: Text(abc.data?[i]["Subname"]),),
                               Image.network("http://api.namanraj.link/upload/"+abc.data?[i]['Subimg'])
                             ],
-                        )
+                      ),
                     );
                   }
               );
@@ -58,8 +49,8 @@ class _SubCategoryState extends State<SubCategory> {
     );
   }
 
-  Future<List<dynamic>>subCategory() async {
-    final rsspcone =await http.get(Uri.parse("http://api.namanraj.link/WebService1.asmx/SubCatApi?id="+widget.id.toString()));
+  Future<List<dynamic>>product() async {
+    final rsspcone =await http.get(Uri.parse(""+widget.id.toString()));
     if(rsspcone.statusCode==200){
       return json.decode(rsspcone.body);
     }
