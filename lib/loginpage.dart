@@ -21,7 +21,6 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: Text('Login Page'),
       ),
-
       body: Column(
         children: [
           TextField(

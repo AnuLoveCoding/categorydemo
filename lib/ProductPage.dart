@@ -13,7 +13,7 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(appBar: AppBar(
-      title: Text(""),
+      title: Text("Product Page"),
     ),
      body: FutureBuilder<List<dynamic>>(
           future: product(),

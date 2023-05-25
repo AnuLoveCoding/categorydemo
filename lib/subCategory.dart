@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-
 import 'ProductPage.dart';
 
 class SubCategory extends StatefulWidget {
-   int id;
+  int id;
   SubCategory({required this.id});
 
   @override
